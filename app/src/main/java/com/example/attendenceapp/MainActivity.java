@@ -33,11 +33,14 @@ import at.markushi.ui.CircleButton;
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;FloatingActionButton fl; RecyclerView recyclerView;
     CustomAdapter customAdapter;ArrayList<ClassItem> arrayList=new ArrayList<>();
-    RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager layoutManager; DbHelper dbHelper;
     @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); loadData();
+        setContentView(R.layout.activity_main);
+//        loadData();
+        dbHelper=new DbHelper(this);
         fl=(FloatingActionButton)findViewById(R.id.fab);
         fl.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { showDialogs(); }});
+        loadClassData();
         recyclerView=(RecyclerView)findViewById(R.id.rec);recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -46,18 +49,33 @@ public class MainActivity extends AppCompatActivity {
         customAdapter.setOnItemCLongclickListener(pos->DeleteData(pos)); setToolbar();
     }
 
-    private boolean DeleteData(int pos) {
-        new AlertDialog.Builder(MainActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Are You Sure?")
-                .setMessage("Do You Want to delete this Data").setPositiveButton("Yes", new DialogInterface.OnClickListener() {@Override
-        public void onClick(DialogInterface dialog, int which) {
-            arrayList.remove(pos);customAdapter.notifyDataSetChanged();
-            SharedPreferences sh=getApplicationContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sh.edit();Gson gson = new Gson();
-            String json = gson.toJson(arrayList);editor.putString("task list", json);editor.apply();
-            Toast.makeText(getApplicationContext(),"Data Deleted ...",Toast.LENGTH_SHORT).show();
+    private void loadClassData() {
+        Cursor cursor =dbHelper.getClassTable();
+        arrayList.clear();
+        while (cursor.moveToNext()){
+            int id=cursor.getInt(cursor.getColumnIndex(DbHelper.c_id));
+            String className=cursor.getString(cursor.getColumnIndex(DbHelper.CLASS_NAME_KEY));
+            String sub=cursor.getString(cursor.getColumnIndex(DbHelper.CLASS_SUBJECT_KEY));
+            arrayList.add(new ClassItem(id,className,sub));
         }
-        }).setNegativeButton("No",null).show();
-      return true;
+    }
+
+    private boolean DeleteData(int pos) {
+//        new AlertDialog.Builder(MainActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Are You Sure?")
+//                .setMessage("Do You Want to delete this Data").setPositiveButton("Yes", new DialogInterface.OnClickListener() {@Override
+//        public void onClick(DialogInterface dialog, int which) {
+//            arrayList.remove(pos);customAdapter.notifyDataSetChanged();
+//            SharedPreferences sh=getApplicationContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sh.edit();Gson gson = new Gson();
+//            String json = gson.toJson(arrayList);editor.putString("task list", json);editor.apply();
+//            Toast.makeText(getApplicationContext(),"Data Deleted ...",Toast.LENGTH_SHORT).show();
+//        }
+//        }).setNegativeButton("No",null).show();
+//      return true;
+        dbHelper.deleteClass(arrayList.get(pos).getC_Id());
+        arrayList.remove(pos);
+        customAdapter.notifyDataSetChanged();
+        return true;
     }
 
     private void loadData() {
@@ -76,13 +94,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this,MainActivity2.class);
     intent.putExtra("fname",arrayList.get(position).getFname());
     intent.putExtra("lname",arrayList.get(position).getLname());
-    intent.putExtra("pos",position);startActivity(intent); }
+    intent.putExtra("pos",position);
+    intent.putExtra("cid",arrayList.get(position).getC_Id());
+    startActivity(intent); }
     private void showDialogs() {
       MyDialog myDialog=new MyDialog();myDialog.show(getSupportFragmentManager(),MyDialog.class_dialog);
       myDialog.setListener((fname,lname)->addClass(fname,lname)); }
     private void addClass(String fname,String lname) {
-        arrayList.add(new ClassItem(fname,lname)); customAdapter.notifyDataSetChanged();
-     saveData();
+        long c_id=dbHelper.addClass(fname,lname);
+        ClassItem classItem = new ClassItem(c_id,fname,lname);
+        arrayList.add(classItem); customAdapter.notifyDataSetChanged();
+//     saveData();
+
     }
 
     private void saveData() {

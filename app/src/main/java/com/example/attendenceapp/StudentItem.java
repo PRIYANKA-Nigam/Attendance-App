@@ -1,19 +1,30 @@
 package com.example.attendenceapp;
 
 public class StudentItem {
-    private String roll,name,status;
+    private String name,status;
+    private int roll;
+    private long s_id;
 
-    public StudentItem(String roll, String name) {
-        this.roll = roll;
+    public StudentItem(String name, int roll, long s_id) {
         this.name = name;
-        status=" ";
+        this.roll = roll;
+        this.s_id = s_id;
+        status="";
     }
 
-    public String getRoll() {
+    public long getS_id() {
+        return s_id;
+    }
+
+    public void setS_id(long s_id) {
+        this.s_id = s_id;
+    }
+
+    public int getRoll() {
         return roll;
     }
 
-    public void setRoll(String roll) {
+    public void setRoll(int roll) {
         this.roll = roll;
     }
 

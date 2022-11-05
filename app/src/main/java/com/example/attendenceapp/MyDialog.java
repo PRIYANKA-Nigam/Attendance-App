@@ -20,8 +20,22 @@ import at.markushi.ui.CircleButton;
 
 public class MyDialog extends DialogFragment {
     public static final String class_dialog="clickC3"; public static final String student_dialog="addStudent";
-    private   OnClickListener listener;public interface OnClickListener{ void onClick(String t1,String t2);}
-    public void setListener(OnClickListener listener){ this.listener=  listener; }@NonNull @Override
+    private   OnClickListener listener;
+    public interface OnClickListener{ void onClick(String t1,String t2);}
+    public void setListener(OnClickListener listener){ this.listener=  listener; }
+    private int roll;
+    private String name;
+
+    public MyDialog() {
+    }
+
+    public MyDialog(int roll, String name) {
+        this.roll = roll;
+        this.name = name;
+    }
+
+    @NonNull
+    @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) { Dialog dialog=null;
         if (getTag().equals(class_dialog))  dialog=getAddDialog(); if (getTag().equals(student_dialog))  dialog=getAddStudentDialog();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); return dialog; }

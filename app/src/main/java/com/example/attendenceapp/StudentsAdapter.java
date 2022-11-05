@@ -32,7 +32,7 @@ public interface OnItemClickListener{ void onClick(int position);}
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.student_item,parent,false);
         return new StudentViewHolder(view,onItemClickListener,onItemLongClickListener); }@Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
-        holder.t1.setText(arrayList.get(position).getRoll());
+        holder.t1.setText(arrayList.get(position).getRoll()+"");
         holder.t2.setText(arrayList.get(position).getName());
         holder.t3.setText(arrayList.get(position).getStatus());
         holder.cardView.setCardBackgroundColor(getColor(position)); }
