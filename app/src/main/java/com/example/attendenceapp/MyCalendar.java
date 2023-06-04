@@ -32,9 +32,9 @@ public class MyCalendar extends DialogFragment {
     void setDate(int year,int month,int day){
         calendar.set(Calendar.YEAR,year);
         calendar.set(Calendar.MONTH,month);
-        calendar.set(Calendar.DAY_OF_MONTH,day);;
+        calendar.set(Calendar.DAY_OF_MONTH,day);
     }
     String getDate(){
-        return DateFormat.format("dd.mm.yyyy",calendar).toString();
+        return DateFormat.format("dd.MM.yyyy",calendar).toString();
     }
 }

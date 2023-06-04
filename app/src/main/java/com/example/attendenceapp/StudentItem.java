@@ -12,6 +12,13 @@ public class StudentItem {
         status="";
     }
 
+    public StudentItem(String name, String status, int roll, long s_id) {
+        this.name = name;
+        this.status = status;
+        this.roll = roll;
+        this.s_id = s_id;
+    }
+
     public long getS_id() {
         return s_id;
     }
