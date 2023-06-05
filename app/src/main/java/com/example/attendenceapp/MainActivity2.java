@@ -47,16 +47,17 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
     @Override
     protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main2);
 //    loadData();
+        Intent intent=getIntent(); f=intent.getStringExtra("fname");
+        l=intent.getStringExtra("lname"); p=intent.getIntExtra("pos",-1);
+        cid=intent.getLongExtra("cid",-1);
         StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
         StorageVolume storageVolume = storageManager.getStorageVolumes().get(0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            filePdf = new File(storageVolume.getDirectory().getPath()+"/Download/rec.pdf");
+            filePdf = new File(storageVolume.getDirectory().getPath()+"/Download/"+f+".pdf");
         }
         calendar=new MyCalendar();
     dbHelper=new DbHelper(this);
-        Intent intent=getIntent(); f=intent.getStringExtra("fname");
-       l=intent.getStringExtra("lname"); p=intent.getIntExtra("pos",-1);
-       cid=intent.getLongExtra("cid",-1);
+
        setToolbar();
         try  {
             loadStuData();

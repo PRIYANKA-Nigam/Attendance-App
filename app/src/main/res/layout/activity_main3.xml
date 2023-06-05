@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/holo_orange_light"
-    android:padding="20sp"
+    android:background="@android:color/holo_blue_light"
+    android:padding="10sp"
     tools:context=".MainActivity3">
     <include
         android:id="@+id/tl2"
@@ -15,85 +16,54 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="horizontal">
-            <TableRow android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                >
-                <TextView android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name : "
-                    android:textSize="25sp"
-                    android:textStyle="bold"/>
-                <EditText
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:id="@+id/ed1"
-                    android:hint="Enter Name"/>
-            </TableRow>
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:layout_weight="1"
-                />
-        </LinearLayout>
 
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:orientation="horizontal">
-            <TableRow android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 android:layout_weight="1"
-                >
-                <TextView android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="EmpId : "
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-                <EditText
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:id="@+id/ed2"
-                    android:hint="Id"/>
-            </TableRow>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Upload Image"
-                android:layout_marginLeft="18dp"
-                android:id="@+id/bt"/>
+                android:src="@drawable/ic_launcher_background" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="UPLOAD"
+            android:layout_gravity="bottom|left"
+            android:id="@+id/bt"/>
+<!--        <LinearLayout-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:orientation="horizontal">-->
+
         </LinearLayout>
         <TableRow android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/r3">
+           >
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Profile : "
+                android:text="Profile: "
                 android:textStyle="bold"
-                android:textSize="25dp"></TextView>
+                android:layout_weight="1"
+                android:textSize="23dp"></TextView>
 
             <EditText
-                android:id="@+id/ed3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_weight="1"
                 android:hint="Designation" />
         </TableRow>
         <TableRow android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/r4">
+            android:layout_height="wrap_content">
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="DOB : "
+                android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="25dp"></TextView>
 
@@ -101,15 +71,16 @@
                 android:id="@+id/ed4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="date"
                 android:hint="DOB(in dd/mm/yyyy)" />
         </TableRow>
         <TableRow android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/r5">
+            android:layout_height="wrap_content">
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="ODC : "
                 android:textStyle="bold"
+                android:layout_weight="1"
                 android:textSize="25dp"></TextView>
 
             <EditText
@@ -124,6 +95,7 @@
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Email : "
+                android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="25dp"></TextView>
 
@@ -131,29 +103,66 @@
                 android:id="@+id/ed6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:hint="Email" />
+        </TableRow>
+        <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+          >
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Skills : "
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:textSize="25dp"></TextView>
+
+<!--            <Spinner-->
+<!--                android:layout_column="1"-->
+<!--                android:layout_gravity="left|center"-->
+<!--                android:gravity="center_horizontal"-->
+<!--             android:textAlignment="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                android:background="@color/purple_700"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/sp"-->
+<!--                />-->
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_700"
+              >
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/sp"
+                />
+            </FrameLayout>
         </TableRow>
         <TableRow android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/r7">
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Experience : "
+                android:text="Experience:"
                 android:textStyle="bold"
-                android:textSize="25dp"></TextView>
+                android:textSize="20dp"></TextView>
 
             <EditText
                 android:id="@+id/ed7"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
                 android:hint="Relevant Years of experience" />
         </TableRow>
         <TableRow android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/r8">
+          >
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="CTC : "
+                android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="25dp"></TextView>
 
@@ -161,17 +170,88 @@
                 android:id="@+id/ed8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:hint="Annual Package" />
         </TableRow>
+<!--        <TableRow android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/r9">-->
+<!--        <TextView android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:text="Company : "-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_weight="1"-->
+<!--            android:textSize="25dp"></TextView>-->
+<!--            <Button-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="10sp"-->
+<!--                android:text=""-->
+<!--                android:gravity="center"-->
+<!--                android:layout_gravity="left"-->
+<!--                android:textStyle="bold"-->
+<!--                android:drawableRight="@drawable/add_24"-->
+<!--                android:id="@+id/bt3"/>-->
+<!--        </TableRow>-->
+<!--        <TableRow android:layout_width="fill_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ScrollView android:layout_height="wrap_content"-->
+<!--                android:layout_width="wrap_content">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/ll"-->
+<!--            android:orientation="vertical"-->
+<!--            />-->
+
+<!--            </ScrollView>-->
+<!--        </TableRow>-->
     </TableLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="PRINT"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginTop="50sp"
-        android:layout_marginLeft="18dp"
-        android:id="@+id/bt2"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Company Description : "
+            android:gravity="left|center"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textSize="20dp"></TextView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text=""
+            android:gravity="center"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:drawableRight="@drawable/add_24"
+            android:id="@+id/bt3"/>
+    </LinearLayout>
+    <ScrollView android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll"
+            android:orientation="vertical"
+            />
+
+    </ScrollView>
+</LinearLayout>
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="20sp"-->
+<!--        android:text="PRINT"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginLeft="18dp"-->
+<!--        android:id="@+id/bt2"/>-->
 </LinearLayout>
