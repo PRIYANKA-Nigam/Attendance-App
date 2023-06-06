@@ -34,7 +34,7 @@ public interface OnItemClickListener{ void onClick(int position);}
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
         holder.t1.setText(arrayList.get(position).getRoll()+"");
         holder.t2.setText(arrayList.get(position).getName());
-        holder.t3.setText(arrayList.get(position).getStatus());
+//        holder.t3.setText(arrayList.get(position).getStatus());
         holder.cardView.setCardBackgroundColor(getColor(position)); }
         private int getColor(int position) {
     String status=arrayList.get(position).getStatus();
@@ -50,7 +50,8 @@ public interface OnItemClickListener{ void onClick(int position);}
         TextView t1,t2,t3; CardView cardView;
         public StudentViewHolder(@NonNull View itemView,OnItemClickListener onItemClickListener,OnItemLongClickListener onItemLongClickListener) { super(itemView);
             t1=(TextView)itemView.findViewById(R.id.roll);t2=(TextView)itemView.findViewById(R.id.name);
-            t3=(TextView)itemView.findViewById(R.id.status);cardView=(CardView)itemView.findViewById(R.id.card);
+//            t3=(TextView)itemView.findViewById(R.id.status);
+            cardView=(CardView)itemView.findViewById(R.id.card);
             itemView.setOnClickListener(v -> onItemClickListener.onClick(getAdapterPosition()));
             itemView.setOnLongClickListener(v -> onItemLongClickListener.onItemLongClick(getAdapterPosition()));
         }}}

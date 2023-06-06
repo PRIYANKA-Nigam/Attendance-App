@@ -96,7 +96,7 @@ public class DbHelper extends SQLiteOpenHelper {
         SQLiteDatabase database=this.getReadableDatabase();
         return database.rawQuery(SELECT_CLASS_TABLE,null);
     }
-    long addStudent(long cid,String name,int roll){
+    long addStudent(long cid,String name,String roll){
         SQLiteDatabase database =this.getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put(c_id,cid);

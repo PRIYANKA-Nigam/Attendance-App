@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lin"
@@ -19,76 +18,87 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="144dp"
             android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_weight="1"
-                android:src="@drawable/ic_launcher_background" />
-        <Button
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="UPLOAD"
-            android:layout_gravity="bottom|left"
-            android:id="@+id/bt"/>
-<!--        <LinearLayout-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:orientation="horizontal">-->
+            android:layout_height="144dp"
+            android:layout_gravity="right"
+            android:orientation="vertical">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profile: "
+                    android:textSize="23dp"
+                    android:textStyle="bold"></TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Designation" />
+            </TableRow>
+            <TableRow android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="DOB : "
+                    android:textStyle="bold"
+                    android:textSize="25dp"></TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:hint="DOB(in dd/mm/yyyy)" />
+            </TableRow>
+            <TableRow android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="ODC : "
+                    android:textStyle="bold"
+                    android:textSize="25dp"></TextView>
+
+                <EditText
+                    android:id="@+id/ed5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Project Location" />
+            </TableRow>
         </LinearLayout>
-        <TableRow android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-           >
-            <TextView android:layout_height="wrap_content"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:text="Profile: "
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:textSize="23dp"></TextView>
+                android:layout_height="144dp"
+                android:layout_gravity="right"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Designation" />
-        </TableRow>
-        <TableRow android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <TextView android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="DOB : "
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:textSize="25dp"></TextView>
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher_background" />
 
-            <EditText
-                android:id="@+id/ed4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:hint="DOB(in dd/mm/yyyy)" />
-        </TableRow>
-        <TableRow android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <TextView android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="ODC : "
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:textSize="25dp"></TextView>
+                <Button
+                    android:id="@+id/bt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:text="UPLOAD"
+                    android:textSize="10sp" />
 
-            <EditText
-                android:id="@+id/ed5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Project Location" />
-        </TableRow>
+            </LinearLayout>
+        </LinearLayout>
+
+
         <TableRow android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/r6">
@@ -108,51 +118,70 @@
         </TableRow>
         <TableRow android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-          >
-            <TextView android:layout_height="wrap_content"
+          ><TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Skills : "
+                android:text="Primary Skills -> "
                 android:textStyle="bold"
-                android:layout_weight="1"
                 android:textSize="25dp"></TextView>
-
-<!--            <Spinner-->
-<!--                android:layout_column="1"-->
-<!--                android:layout_gravity="left|center"-->
-<!--                android:gravity="center_horizontal"-->
-<!--             android:textAlignment="center"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                android:background="@color/purple_700"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/sp"-->
-<!--                />-->
-            <FrameLayout
+            <Button
+                android:id="@+id/bb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_700"
-              >
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/sp"
+                android:drawableLeft="@drawable/down"
+                android:text=""
+                android:layout_weight="1"
                 />
-            </FrameLayout>
+
         </TableRow>
+        <EditText
+            android:id="@+id/edd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Skills"
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+        <TableRow android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="Secondary Skills -> "
+                android:textStyle="bold"
+                android:textSize="25dp"
+                ></TextView>
+            <Button
+                android:id="@+id/bb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/down"
+                android:text=""
+                android:layout_weight="1"
+                />
+        </TableRow>
+        <EditText
+            android:id="@+id/edd2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Skills"
+            android:inputType="textMultiLine"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
         <TableRow android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/r7">
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="Experience:"
+                android:layout_weight="1"
                 android:textStyle="bold"
-                android:textSize="20dp"></TextView>
+                android:textSize="19dp"></TextView>
 
             <EditText
                 android:id="@+id/ed7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:inputType="numberDecimal"
                 android:hint="Relevant Years of experience" />
         </TableRow>
@@ -168,45 +197,12 @@
 
             <EditText
                 android:id="@+id/ed8"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:hint="Annual Package" />
         </TableRow>
-<!--        <TableRow android:layout_width="fill_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/r9">-->
-<!--        <TextView android:layout_height="wrap_content"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:text="Company : "-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_weight="1"-->
-<!--            android:textSize="25dp"></TextView>-->
-<!--            <Button-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textSize="10sp"-->
-<!--                android:text=""-->
-<!--                android:gravity="center"-->
-<!--                android:layout_gravity="left"-->
-<!--                android:textStyle="bold"-->
-<!--                android:drawableRight="@drawable/add_24"-->
-<!--                android:id="@+id/bt3"/>-->
-<!--        </TableRow>-->
-<!--        <TableRow android:layout_width="fill_parent"-->
-<!--            android:layout_height="wrap_content">-->
-<!--            <ScrollView android:layout_height="wrap_content"-->
-<!--                android:layout_width="wrap_content">-->
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/ll"-->
-<!--            android:orientation="vertical"-->
-<!--            />-->
-
-<!--            </ScrollView>-->
-<!--        </TableRow>-->
     </TableLayout>
 <LinearLayout
     android:layout_width="match_parent"
@@ -245,7 +241,11 @@
 
     </ScrollView>
 </LinearLayout>
-<!--    <Button-->
+
+
+
+
+    <!--    <Button-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:textSize="20sp"-->

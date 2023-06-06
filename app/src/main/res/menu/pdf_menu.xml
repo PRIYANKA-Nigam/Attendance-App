@@ -7,4 +7,10 @@
         android:icon="@drawable/download"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/d2"
+        android:title="View PDF"
+        android:icon="@drawable/view"
+        app:showAsAction="always"
+        />
 </menu>

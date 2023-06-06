@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/addStu" android:title="ADD STUDENT"/>
+<item android:id="@+id/addStu" android:title="ADD Employee"/>
     <item android:id="@+id/addDate" android:title="CHANGE DATE"/>
     <item android:id="@+id/showAtt" android:title="Download as PDF"/>
     <item android:id="@+id/showAtts" android:title="View PDF">

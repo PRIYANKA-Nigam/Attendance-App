@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
@@ -72,6 +74,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     pdfDocument.close();
                 }
+                if (item.getItemId()==R.id.d2){
+                    StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
+                    StorageVolume storageVolume = storageManager.getStorageVolumes().get(0);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        filePdf = new File(storageVolume.getDirectory().getPath()+"/Download/main.pdf");
+                        Uri uri = FileProvider.getUriForFile(getApplicationContext(),"com.example.attendenceapp"+".provider",filePdf);
+                        Intent intent=new Intent(Intent.ACTION_VIEW);  //with this i can directly view my pdf
+                        intent.setDataAndType(uri,"application/pdf");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        startActivity(intent);
+                    }
+                }
                 return true;
             }
         });
@@ -108,17 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean DeleteData(int pos) {
-//        new AlertDialog.Builder(MainActivity.this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Are You Sure?")
-//                .setMessage("Do You Want to delete this Data").setPositiveButton("Yes", new DialogInterface.OnClickListener() {@Override
-//        public void onClick(DialogInterface dialog, int which) {
-//            arrayList.remove(pos);customAdapter.notifyDataSetChanged();
-//            SharedPreferences sh=getApplicationContext().getSharedPreferences("shared preferences", Context.MODE_PRIVATE);
-//            SharedPreferences.Editor editor = sh.edit();Gson gson = new Gson();
-//            String json = gson.toJson(arrayList);editor.putString("task list", json);editor.apply();
-//            Toast.makeText(getApplicationContext(),"Data Deleted ...",Toast.LENGTH_SHORT).show();
-//        }
-//        }).setNegativeButton("No",null).show();
-//      return true;
         dbHelper.deleteClass(arrayList.get(pos).getC_Id());
         arrayList.remove(pos);
         customAdapter.notifyDataSetChanged();

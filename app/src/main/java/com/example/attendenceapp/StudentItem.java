@@ -2,17 +2,17 @@ package com.example.attendenceapp;
 
 public class StudentItem {
     private String name,status;
-    private int roll;
+    private String roll;
     private long s_id;
 
-    public StudentItem(String name, int roll, long s_id) {
+    public StudentItem(String name, String roll, long s_id) {
         this.name = name;
         this.roll = roll;
         this.s_id = s_id;
         status="";
     }
 
-    public StudentItem(String name, String status, int roll, long s_id) {
+    public StudentItem(String name, String status,String roll, long s_id) {
         this.name = name;
         this.status = status;
         this.roll = roll;
@@ -27,11 +27,11 @@ public class StudentItem {
         this.s_id = s_id;
     }
 
-    public int getRoll() {
+    public String getRoll() {
         return roll;
     }
 
-    public void setRoll(int roll) {
+    public void setRoll(String roll) {
         this.roll = roll;
     }
 

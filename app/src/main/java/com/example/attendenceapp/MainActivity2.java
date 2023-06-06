@@ -3,6 +3,7 @@ package com.example.attendenceapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,7 +87,7 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
         if (cursor!=null) {
             while (cursor.moveToNext()) {
                 long sid = cursor.getLong(cursor.getColumnIndex(DbHelper.s_id));
-                int roll = cursor.getInt(cursor.getColumnIndex(DbHelper.STUDENT_ROLL_KEY));
+                String roll = cursor.getString(cursor.getColumnIndex(DbHelper.STUDENT_ROLL_KEY));
                 String name = cursor.getString(cursor.getColumnIndex(DbHelper.STUDENT_NAME_KEY));
                 arrayList.add(new StudentItem(name, roll, sid));
             }
@@ -167,6 +168,7 @@ private void loadStatusData(){
   return true;
  }
 
+ @RequiresApi(api = Build.VERSION_CODES.N)
  private boolean onMenuItemClick(MenuItem menuItem) throws IOException {
         if (menuItem.getItemId()==R.id.addStu){ showAddStudentDialog(); }
         if (menuItem.getItemId()==R.id.addDate){
@@ -184,9 +186,20 @@ private void loadStatusData(){
             pdfDocument.close();
         }
      if (menuItem.getItemId()==R.id.showAtts){
-       Intent intent=new Intent(Intent.ACTION_VIEW, Uri.fromFile(filePdf));
-       intent.setType("application/pdf");
-       this.startActivity(intent);
+//       Intent intent=new Intent(Intent.ACTION_VIEW, Uri.fromFile(filePdf));
+//       intent.setType("application/pdf");  //USING these lines i'm able to view my pdf but have to
+                                  //explicitly nevigate to the path in the local.SO ,used below one
+//       this.startActivity(intent);
+         StorageManager storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
+         StorageVolume storageVolume = storageManager.getStorageVolumes().get(0);
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+             filePdf = new File(storageVolume.getDirectory().getPath()+"/Download/"+f+".pdf");
+             Uri uri = FileProvider.getUriForFile(getApplicationContext(),"com.example.attendenceapp"+".provider",filePdf);
+             Intent intent=new Intent(Intent.ACTION_VIEW);  //with this i can directly view my pdf
+       intent.setDataAndType(uri,"application/pdf");
+       intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_GRANT_READ_URI_PERMISSION);
+       startActivity(intent);
+         }
      }
         return true; }
 
@@ -210,7 +223,7 @@ private void loadStatusData(){
         dialog.show(getSupportFragmentManager(),MyDialog.student_dialog);
         dialog.setListener((roll,name)->addStudent(roll,name)); }
         private void addStudent(String S_roll, String name) {
-    int roll=Integer.parseInt(S_roll);
+    String roll=(S_roll);
      long sid=dbHelper.addStudent(cid,name,roll);
      StudentItem studentItem =new StudentItem(name,roll,sid);
       arrayList.add(studentItem);

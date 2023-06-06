@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">Attendence App</string>
+    <string-array name="skill">
+        <item>C</item>
+        <item>C++</item>
+        <item>Java</item>
+        <item>Spring</item>
+        <item>JDBC</item>
+        <item>Python</item>
+        <item>Django</item>
+        <item>Perl</item>
+        <item>Ruby</item>
+        <item>R</item>
+        <item>Scala</item>
+        <item>Flask</item>
+        <item>Golang</item>
+        <item>Guava</item>
+        <item>.Net</item>
+        <item>C#</item>
+        <item>Javascript</item>
+        <item>Angular</item>
+        <item>React JS</item>
+        <item>Node JS</item>
+        <item>Bootstrap</item>
+        <item>HTML/CSS</item>
+        <item>PHP</item>
+        <item>Codeigniter</item>
+        <item>Laravel</item>
+        <item>Kotlin</item>
+        <item>Flutter</item>
+        <item>Swift</item>
+        <item>Mojo</item>
+        <item>Matlab</item>
+        <item>JQuery</item>
+        <item>SQL</item>
+        <item>NoSQL</item>
+        <item>Python</item>
+        <item>Bash</item>
+        <item>Unix</item>
+        <item>Git</item>
+        <item>Matlab</item>
+        <item>AI/ML</item>
+        <item>Data Science</item>
+        <item>IOT/Robotics</item>
+        <item>Cyber Security</item>
+        <item>Networking</item>
+    </string-array>
 </resources>
