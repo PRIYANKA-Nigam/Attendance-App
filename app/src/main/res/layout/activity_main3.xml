@@ -228,6 +228,19 @@
             android:textStyle="bold"
             android:drawableRight="@drawable/add_24"
             android:id="@+id/bt3"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text=""
+            android:gravity="center"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            android:onClick="saveRec"
+            android:drawableRight="@drawable/view"
+            android:drawableTint="@android:color/white"
+            android:id="@+id/btt"/>
     </LinearLayout>
     <ScrollView android:layout_height="wrap_content"
         android:layout_width="wrap_content">
@@ -242,16 +255,20 @@
     </ScrollView>
 </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="398dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="0dp"
+        android:padding="5dp"
+        app:itemBackground="@color/purple_500"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation" />
 
 
 
-    <!--    <Button-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textSize="20sp"-->
-<!--        android:text="PRINT"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginLeft="18dp"-->
-<!--        android:id="@+id/bt2"/>-->
 </LinearLayout>

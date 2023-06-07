@@ -109,19 +109,14 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
         adapter.notifyItemChanged(position);
 
 }
+        @RequiresApi(api = Build.VERSION_CODES.N)
         private void setToolbar() { toolbar=(Toolbar)findViewById(R.id.tool);TextView title=toolbar.findViewById(R.id.tt);
        sub=toolbar.findViewById(R.id.tt2);
         ImageButton imageButton=toolbar.findViewById(R.id.back);
         ImageButton imageButton1=toolbar.findViewById(R.id.save);title.setText(f);
             sub.setText(l+"  |   "+ calendar.getDate());
             imageButton.setOnClickListener(v -> onBackPressed());
-        imageButton1.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-         saveStatus();
-           //  saveData();
-         }
-        });
+             imageButton1.setVisibility(View.INVISIBLE);
          toolbar.inflateMenu(R.menu.stuent_menu);
          toolbar.setOnMenuItemClickListener(menuItem-> {
              try {

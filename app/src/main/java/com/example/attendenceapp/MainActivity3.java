@@ -1,5 +1,6 @@
 package com.example.attendenceapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -8,8 +9,10 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
@@ -26,35 +29,55 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class MainActivity3 extends AppCompatActivity {
+    BottomNavigationView bottomNavigationView;
     Toolbar toolbar; ImageButton imageButton;
     LinearLayout layout,layout2;
     String name,id;  File  filePdf;
-    Button b1,b2,b3,b; ImageView imageView;
+    Button b1,b2,b3,b,b4; ImageView imageView;
     EditText editText,editText2;
     List<String> list=new ArrayList<>();
+    ArrayList<Company> companies =new ArrayList<>();
     String[] items;boolean[] checkedItems;
     ArrayList<Integer> arrayList=new ArrayList<>();
     static MainActivity3 instance;
-    String data=name;
+    String data="";String  Eid="";
+    TextView title,sub;
+    ArrayList<String> arrayList2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         instance=this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        try{
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   startActivity(new Intent(getApplicationContext(),MainActivity2.class));
+                }
+            });
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+        arrayList2=new ArrayList<>();
        id=getIntent().getStringExtra("id");
         name = getIntent().getStringExtra("name");
-
+        arrayList2.add(name);
+        data=name;Eid=id;
         layout= findViewById(R.id.lin);
         layout2= findViewById(R.id.ll);
         list.add("0.5"); list.add("1"); list.add("2"); list.add("3");
@@ -62,6 +85,7 @@ public class MainActivity3 extends AppCompatActivity {
         list.add("8"); list.add("9"); list.add("10"); list.add("10+");
         b1=findViewById(R.id.bt);
         b2=findViewById(R.id.bb);  b=findViewById(R.id.bb2);
+        b4=findViewById(R.id.btt);
         editText=findViewById(R.id.edd);     editText2=findViewById(R.id.edd2);
         items=getResources().getStringArray(R.array.skill);
         checkedItems=new boolean[items.length];
@@ -69,13 +93,14 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 chk("1");
-
+               bottomNavigationView.setVisibility(View.INVISIBLE);
             }
         });
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chk("2");
+                bottomNavigationView.setVisibility(View.INVISIBLE);
             }
         });
         b3=findViewById(R.id.bt3);
@@ -84,6 +109,7 @@ public class MainActivity3 extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.INVISIBLE);
                 Intent intent =new Intent(Intent.ACTION_PICK);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent,1000);
@@ -93,6 +119,8 @@ public class MainActivity3 extends AppCompatActivity {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bottomNavigationView.setVisibility(View.INVISIBLE);
+                b4.setVisibility(View.VISIBLE);
                 addView();
             }
         });
@@ -124,6 +152,7 @@ public class MainActivity3 extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 pdfDocument.close();
+                    bottomNavigationView.setVisibility(View.VISIBLE);
 //                    Intent intent=new Intent(getApplicationContext(),ViewProfileActivity.class);
 //                    intent.putExtra("name",name);
 //                    startActivity(intent);
@@ -145,12 +174,28 @@ public class MainActivity3 extends AppCompatActivity {
             }
         });
         setToolbar();
+
+         bottomNavigationView=findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.print);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() { @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.print:
+                    return true;
+                case R.id.view:
+                    startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                    Toast.makeText(MainActivity3.this,"Print as PDF...",Toast.LENGTH_LONG).show();
+                    overridePendingTransition(0,0);
+                    return true;
+            }
+            return false; }});
     }
  public static MainActivity3 getActivityInstance(){
         return instance;
  }
  public String getData(){
-        return this.data;
+        String f = this.data+","+this.Eid;
+        return f;
  }
     private void chk(String f) {
 
@@ -240,18 +285,63 @@ public class MainActivity3 extends AppCompatActivity {
             if (requestCode==1000){
                 imageView.setImageURI(data.getData());
             }
+
         }
     }
 
     private void setToolbar() {
         toolbar=(Toolbar)findViewById(R.id.tool);
-        TextView title=toolbar.findViewById(R.id.tt);
-        TextView  sub=toolbar.findViewById(R.id.tt2);
+        title=toolbar.findViewById(R.id.tt);
+        sub=toolbar.findViewById(R.id.tt2);
         imageButton=toolbar.findViewById(R.id.back);
         ImageButton imageButton1=toolbar.findViewById(R.id.save);
         title.setText(name);
         sub.setText("EmpId - "+id);
         imageButton.setOnClickListener(v -> onBackPressed());
         imageButton1.setVisibility(View.INVISIBLE);
+    }
+
+    public void saveRec(View view) {
+     if(checkIfvalidate()){
+      Intent intent =new Intent(MainActivity3.this,MainActivity4.class);
+      Bundle bundle =new Bundle();
+      bundle.putSerializable("list",companies);
+//      bundle.putString("Empname",name);
+      intent.putExtras(bundle);
+      startActivity(intent);
+
+     }
+    }
+
+    private boolean checkIfvalidate() {
+        companies.clear();
+        boolean result=true;
+        for (int i=0;i<layout2.getChildCount();i++){
+            View view1 =layout2.getChildAt(i);
+            EditText editText=view1.findViewById(R.id.ed);
+            AppCompatSpinner spinner =view1.findViewById(R.id.sp2);
+            Company company =new Company();
+            if (!editText.getText().toString().equals("")){
+                company.setCompany(editText.getText().toString());
+            }else {
+                result=false;
+                break;
+            }
+            if (spinner.getSelectedItemPosition()!=0){
+                company.setYears(list.get(spinner.getSelectedItemPosition()));
+            }else {
+                result=false;
+                break;
+            }
+            company.setName(name);
+            companies.add(company);
+        }
+        if (companies.size()==0){
+            result=false;
+            Toast.makeText(this,"Enter company record 1st",Toast.LENGTH_SHORT).show();
+        }else if (!result){
+            Toast.makeText(this,"Enter all details correctly",Toast.LENGTH_SHORT).show();
+        }
+        return result;
     }
 }

@@ -168,4 +168,6 @@ public class MainActivity extends AppCompatActivity {
         String json = gson.toJson(arrayList);editor.putString("task list", json);editor.apply();
         Toast.makeText(getApplicationContext(),"Data Saved ...",Toast.LENGTH_SHORT).show();
     }
+
+
 }
