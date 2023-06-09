@@ -306,7 +306,6 @@ public class MainActivity3 extends AppCompatActivity {
       Intent intent =new Intent(MainActivity3.this,MainActivity4.class);
       Bundle bundle =new Bundle();
       bundle.putSerializable("list",companies);
-//      bundle.putString("Empname",name);
       intent.putExtras(bundle);
       startActivity(intent);
 

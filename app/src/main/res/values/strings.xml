@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Attendence App</string>
+    <string name="employee_management_system"><u>Employee Management System</u></string>
     <string-array name="skill">
         <item>C</item>
         <item>C++</item>

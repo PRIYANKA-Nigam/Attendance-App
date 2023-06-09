@@ -69,12 +69,15 @@ ArrayList<String> arrayList;
 
 
        listView = findViewById(R.id.ll);
-        SharedPreferences sh=getSharedPreferences("list",MODE_PRIVATE);
+        arrayAdapter  =new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,arrayList);
+        listView.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
+        SharedPreferences sh=getSharedPreferences("lists",MODE_PRIVATE);
         Set<String> set=sh.getStringSet("notes",new HashSet<String>());
         for(String i:set){
             arrayList.add(i);
             arrayAdapter  =new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,arrayList);
-            listView.setAdapter(arrayAdapter);
+//            listView.setAdapter(arrayAdapter);
             arrayAdapter.notifyDataSetChanged();
         }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,7 +120,7 @@ ArrayList<String> arrayList;
     }
 
     private void setToolbar() {
-        toolbar=(Toolbar)findViewById(R.id.tool);
+        toolbar=findViewById(R.id.tool);
         title=toolbar.findViewById(R.id.tt);
         sub=toolbar.findViewById(R.id.tt2);
         sub.setVisibility(View.INVISIBLE);
@@ -128,14 +131,15 @@ ArrayList<String> arrayList;
         imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sh=getApplicationContext().getSharedPreferences("list", Context.MODE_PRIVATE);
+                SharedPreferences sh=getApplicationContext().getSharedPreferences("lists", Context.MODE_PRIVATE);
                 HashSet<String> set=new HashSet<>(arrayList);sh.edit().putStringSet("notes",set).apply();
+                Toast.makeText(getApplicationContext(),"Saved ...",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void loadData() {
-        SharedPreferences sh=getSharedPreferences("list",MODE_PRIVATE);
+        SharedPreferences sh=getSharedPreferences("lists",MODE_PRIVATE);
         Set<String> set=sh.getStringSet("notes",new HashSet<String>());
         for(String i:set){
             arrayList.add(i);

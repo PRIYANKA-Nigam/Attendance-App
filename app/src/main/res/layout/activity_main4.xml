@@ -7,13 +7,16 @@
     android:padding="20sp"
     android:orientation="vertical"
     tools:context=".MainActivity4">
-
+    <include
+        android:id="@+id/tl2"
+        layout="@layout/toolbar"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rec"
         android:layout_width="358dp"
         android:layout_height="627dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="10dp"
+        android:layout_below="@id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="23dp" />
 
@@ -23,8 +26,9 @@
         android:layout_height="41dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="53dp"
         android:layout_weight="1"
+        android:layout_below="@id/tl2"
         android:gravity="center"
         android:textSize="25dp"
         android:textStyle="bold"

@@ -46,7 +46,7 @@ public class MyDialog extends DialogFragment {
         CircleButton   c1=(CircleButton)view.findViewById(R.id.imgf); CircleButton    c2=(CircleButton)view.findViewById(R.id.imgm);
         CircleButton   c3=(CircleButton)view.findViewById(R.id.imgl);
         EditText  rolledt=(EditText)view.findViewById(R.id.editTextTextPersonName);EditText  nameedt=(EditText)view.findViewById(R.id.editTextTextPersonName8);
-        rolledt.setHint("Employee Code"); nameedt.setHint("Name");
+        rolledt.setHint("Employee Code[In Numeric]"); nameedt.setHint("Name");
         im.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) { dismiss(); }});
         c3.setOnClickListener(new View.OnClickListener() {@Override
             public void onClick(View v) { String roll=rolledt.getText().toString();String name=nameedt.getText().toString();

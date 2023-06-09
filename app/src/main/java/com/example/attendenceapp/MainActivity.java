@@ -128,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();String json = sharedPreferences.getString("task list", null);
-        Type type = new TypeToken<ArrayList<ClassItem>>() {}.getType();arrayList = gson.fromJson(json, type);
-        if (arrayList == null) { arrayList = new ArrayList<>(); } }
+//    private void loadData() {
+//        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+//        Gson gson = new Gson();String json = sharedPreferences.getString("task list", null);
+//        Type type = new TypeToken<ArrayList<ClassItem>>() {}.getType();arrayList = gson.fromJson(json, type);
+//        if (arrayList == null) { arrayList = new ArrayList<>(); } }
     private void setToolbar() {
        TextView title=toolbar.findViewById(R.id.tt);
         TextView sub=toolbar.findViewById(R.id.tt2);
