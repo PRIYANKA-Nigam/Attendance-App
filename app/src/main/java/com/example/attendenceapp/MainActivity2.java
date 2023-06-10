@@ -1,5 +1,6 @@
 package com.example.attendenceapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -69,7 +70,7 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
         layoutManager=new LinearLayoutManager(this); recyclerView.setLayoutManager(layoutManager);
         adapter=new StudentsAdapter(this,arrayList); recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(position -> changeStatus(position));
-         adapter.setOnItemLongClickListener(pos->DeleteData(pos));
+//         adapter.setOnItemLongClickListener(pos->DeleteData(pos));
 
       // loadData();
         try  {
@@ -101,10 +102,7 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
         else
             status="P";
         arrayList.get(position).setStatus(status);
-        Intent intent =new Intent(getApplicationContext(),MainActivity3.class);
-        intent.putExtra("id",String.valueOf(arrayList.get(position).getRoll()));
-        intent.putExtra("name",arrayList.get(position).getName());
-        startActivity(intent);
+
 
         adapter.notifyItemChanged(position);
 
@@ -147,21 +145,21 @@ private void loadStatusData(){
         String status= dbHelper.getStatus(studentItem.getS_id(),calendar.getDate());
         if (status!=null)
             studentItem.setStatus(status);
-//        else
-//            studentItem.setStatus(" ");
+        else
+            studentItem.setStatus(" ");
     }
     adapter.notifyDataSetChanged();
 }
 
-    private Boolean DeleteData(int pos) {
-    dbHelper.deleteStudent(arrayList.get(pos).getS_id());
-  arrayList.remove(pos);adapter.notifyDataSetChanged();
-//  SharedPreferences sh=getApplicationContext().getSharedPreferences("shared", Context.MODE_PRIVATE);
-//  SharedPreferences.Editor editor = sh.edit();Gson gson = new Gson();
-//  String json = gson.toJson(arrayList);editor.putString("task", json);editor.apply();
-//  Toast.makeText(getApplicationContext(),"Data Deleted ...",Toast.LENGTH_SHORT).show();
-  return true;
- }
+//    private Boolean DeleteData(int pos) {
+//    dbHelper.deleteStudent(arrayList.get(pos).getS_id());
+//  arrayList.remove(pos);adapter.notifyDataSetChanged();
+////  SharedPreferences sh=getApplicationContext().getSharedPreferences("shared", Context.MODE_PRIVATE);
+////  SharedPreferences.Editor editor = sh.edit();Gson gson = new Gson();
+////  String json = gson.toJson(arrayList);editor.putString("task", json);editor.apply();
+////  Toast.makeText(getApplicationContext(),"Data Deleted ...",Toast.LENGTH_SHORT).show();
+//  return true;
+// }
 
  @RequiresApi(api = Build.VERSION_CODES.N)
  private boolean onMenuItemClick(MenuItem menuItem) throws IOException {
@@ -226,5 +224,28 @@ private void loadStatusData(){
 //         saveData();
 }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+       switch (item.getItemId()){
+           case 0 :
+               deleteStudent(item.getGroupId());
+               break;
+           case 1:
+               editProfile(item.getGroupId());
+               break;
+       }
+        return super.onContextItemSelected(item);
+    }
 
+    private void editProfile(int position) {
+        Intent intent =new Intent(getApplicationContext(),MainActivity3.class);
+        intent.putExtra("id",String.valueOf(arrayList.get(position).getRoll()));
+        intent.putExtra("name",arrayList.get(position).getName());
+        startActivity(intent);
+    }
+
+    private void deleteStudent(int position) {
+        dbHelper.deleteStudent(arrayList.get(position).getS_id());
+        arrayList.remove(position);adapter.notifyDataSetChanged();
+    }
 }

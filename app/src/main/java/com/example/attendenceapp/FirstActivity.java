@@ -40,4 +40,8 @@ public class FirstActivity extends AppCompatActivity {
     public void Export(View view) {
         startActivity(new Intent(getApplicationContext(),SheetListActivity.class));
     }
+
+    public void Attendance(View view) {
+        startActivity(new Intent(getApplicationContext(),AttendanceActivity.class));
+    }
 }

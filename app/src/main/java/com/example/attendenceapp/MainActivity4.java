@@ -46,7 +46,11 @@ RecyclerView recyclerView;  Toolbar toolbar;
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        companies = (ArrayList<Company>) getIntent().getExtras().getSerializable("list");
+       try {
+            companies = (ArrayList<Company>) getIntent().getExtras().getSerializable("list");
+        }catch (NullPointerException e){
+           e.printStackTrace();
+       }
 
 
 //        JSONObject jsonObject = new JSONObject();

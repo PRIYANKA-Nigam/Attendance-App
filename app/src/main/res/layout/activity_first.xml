@@ -71,6 +71,21 @@
                 android:textSize="25dp"
                 android:text="Export in Excel" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray">
+            <Button
+                android:layout_width="250dp"
+                android:onClick="Attendance"
+                android:layout_height="250dp"
+                android:background="@drawable/attendance"
+                android:layout_marginBottom="550dp"
+                android:layout_margin="70sp"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:text="Attendance" />
+        </RelativeLayout>
     </ViewFlipper>
     <Button
         android:id="@+id/button5"

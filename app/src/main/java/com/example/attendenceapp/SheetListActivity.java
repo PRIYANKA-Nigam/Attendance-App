@@ -59,14 +59,14 @@ File file;
         setContentView(R.layout.activity_sheet_list);
         calendar=new MyCalendar();
         cid =getIntent().getLongExtra("cid",-1);
-        loadListItems();
+//        loadListItems();
         listView = findViewById(R.id.ll);
         arrayAdapter = new ArrayAdapter(this,R.layout.sheet_list,R.id.date_l,listItems);
 
 
         setToolbar();
 
-
+        filePath = new File(Environment.getExternalStorageDirectory() + "/" + "data.xls");
 
         e1 = findViewById(R.id.editTextTextPersonName3);
         e2 = findViewById(R.id.editTextTextPersonName4);
@@ -82,45 +82,45 @@ File file;
 
 
                 try {
-                    createExcelWorkbook();
-//                    if (!filePath.exists()) {
-//                        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
-//                        HSSFSheet hssfSheet = hssfWorkbook.createSheet("MySheet");
-//
-//                        HSSFRow hssfRow = hssfSheet.createRow(0);
-//                        HSSFCell hssfCell = hssfRow.createCell(0);
-//
-//                        hssfCell.setCellValue(e1.getText().toString());
-//                        filePath.createNewFile();
-//                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-//                        hssfWorkbook.write(fileOutputStream);
-//                        e1.setText("");
-//                        Toast.makeText(SheetListActivity.this, "File Created", Toast.LENGTH_SHORT).show();
-//
-//                        if (fileOutputStream != null) {
-//                            fileOutputStream.flush();
-//                            fileOutputStream.close();
-//                        }
-//                    }
-//
-//                    else{
-//
-//                        FileInputStream fileInputStream = new FileInputStream(filePath);
-//                        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(fileInputStream);
-//                        HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
-//                        int lastRowNum = hssfSheet.getLastRowNum();
-//
-//                        HSSFRow hssfRow = hssfSheet.createRow(++lastRowNum);
-//                        hssfRow.createCell(0).setCellValue(e1.getText().toString());
-//
-//                        fileInputStream.close();
-//
-//                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-//                        hssfWorkbook.write(fileOutputStream);
-//                        e1.setText("");
-//                        Toast.makeText(SheetListActivity.this, "File Updated", Toast.LENGTH_SHORT).show();
-//                        fileOutputStream.close();
-//                    }
+//                    createExcelWorkbook();
+                    if (!filePath.exists()) {
+                        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+                        HSSFSheet hssfSheet = hssfWorkbook.createSheet("MySheet");
+
+                        HSSFRow hssfRow = hssfSheet.createRow(0);
+                        HSSFCell hssfCell = hssfRow.createCell(0);
+
+                        hssfCell.setCellValue(e1.getText().toString());
+                        filePath.createNewFile();
+                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                        hssfWorkbook.write(fileOutputStream);
+                        e1.setText("");
+                        Toast.makeText(SheetListActivity.this, "File Created", Toast.LENGTH_SHORT).show();
+
+                        if (fileOutputStream != null) {
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        }
+                    }
+
+                    else{
+
+                        FileInputStream fileInputStream = new FileInputStream(filePath);
+                        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(fileInputStream);
+                        HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(0);
+                        int lastRowNum = hssfSheet.getLastRowNum();
+
+                        HSSFRow hssfRow = hssfSheet.createRow(++lastRowNum);
+                        hssfRow.createCell(0).setCellValue(e1.getText().toString());
+
+                        fileInputStream.close();
+
+                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                        hssfWorkbook.write(fileOutputStream);
+                        e1.setText("");
+                        Toast.makeText(SheetListActivity.this, "File Updated", Toast.LENGTH_SHORT).show();
+                        fileOutputStream.close();
+                    }
 
 
                 } catch (Exception e) {
@@ -193,11 +193,11 @@ File file;
 //        toolbar.setOnMenuItemClickListener(menuItem->onMenuItemClick(menuItem));
     }
 
-    private void loadListItems() {
-        Cursor cursor = new DbHelper(this).getDistinctMonths(cid);
-        while (cursor.moveToNext()){
-            String date = cursor.getString(cursor.getColumnIndex(DbHelper.DATE_KEY));
-            listItems.add(date.substring(3));
-        }
-    }
+//    private void loadListItems() {
+//        Cursor cursor = new DbHelper(this).getDistinctMonths(cid);
+//        while (cursor.moveToNext()){
+//            String date = cursor.getString(cursor.getColumnIndex(DbHelper.DATE_KEY));
+//            listItems.add(date.substring(3));
+//        }
+//    }
 }
