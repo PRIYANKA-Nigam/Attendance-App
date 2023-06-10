@@ -1,5 +1,6 @@
 package com.example.attendenceapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -50,10 +52,13 @@ public class MainActivity extends AppCompatActivity {
     CustomAdapter customAdapter;ArrayList<ClassItem> arrayList=new ArrayList<>();
     RecyclerView.LayoutManager layoutManager; DbHelper dbHelper;
     File filePdf;
+    ArrayList<String> taskList= new ArrayList<>();
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        loadData();
+
         toolbar=(Toolbar)findViewById(R.id.tool);
         toolbar.inflateMenu(R.menu.pdf_menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -106,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         customAdapter=new CustomAdapter(this,arrayList);recyclerView.setAdapter(customAdapter);
         customAdapter.setOnItemClickListener(position -> gotoItemActivity(position));
-        customAdapter.setOnItemCLongclickListener(pos->DeleteData(pos)); setToolbar();
+//        customAdapter.setOnItemCLongclickListener(pos->DeleteData(pos)); setToolbar();
 
     }
 
@@ -121,12 +126,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean DeleteData(int pos) {
-        dbHelper.deleteClass(arrayList.get(pos).getC_Id());
-        arrayList.remove(pos);
-        customAdapter.notifyDataSetChanged();
-        return true;
-    }
+//    private boolean DeleteData(int pos) {
+//        dbHelper.deleteClass(arrayList.get(pos).getC_Id());
+//        arrayList.remove(pos);
+//        customAdapter.notifyDataSetChanged();
+//        return true;
+//    }
 
 //    private void loadData() {
 //        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -169,5 +174,42 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Data Saved ...",Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case 0 :
+                deleteClass(item.getGroupId());
+                break;
+            case 1:
+                addAgenda(item.getGroupId());
+                break;
+        }
+        return super.onContextItemSelected(item);
 
+    }
+
+    private void addAgenda(int groupId) {
+     ShowTaskDialog();
+    }
+
+    private void ShowTaskDialog() {
+        AgendaDialog myDialog=new AgendaDialog();
+        myDialog.show(getSupportFragmentManager(),"agenda");
+        myDialog.setListener((task)->addTask(task));
+    }
+
+    private void addTask(String task) {
+    taskList.add(task);
+        long c_id=dbHelper.addTask(task);  //............not working
+        Toast.makeText(getApplicationContext(),"Task Saved!!!",Toast.LENGTH_SHORT).show();
+    Intent intent=new Intent(getApplicationContext(),TodoActivity.class);
+    intent.putExtra("task",taskList);
+    startActivity(intent);
+    }
+
+    private void deleteClass(int pos) {
+        dbHelper.deleteClass(arrayList.get(pos).getC_Id());
+        arrayList.remove(pos);
+        customAdapter.notifyDataSetChanged();
+    }
 }

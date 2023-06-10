@@ -87,7 +87,7 @@ RecyclerView recyclerView;  Toolbar toolbar;
             @Override
             public void onClick(View v) {
                 SharedPreferences sh=getApplicationContext().getSharedPreferences("rec", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sh.edit();
+                SharedPreferences.Editor editor = sh.edit();  //...............not working
                 Gson gson = new Gson();
                 String json = gson.toJson(companies);editor.putString("task", json);editor.apply();
                 Toast.makeText(getApplicationContext(),"Records Saved ...",Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ RecyclerView recyclerView;  Toolbar toolbar;
 //        recyclerView.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
 //
-//        }
+//        }  //.......................not working
         SharedPreferences sharedPreferences = getSharedPreferences("rec", MODE_PRIVATE);
         Gson gson = new Gson();String json = sharedPreferences.getString("task", null);
         Type type = new TypeToken<ArrayList<Company>>() {}.getType();companies = gson.fromJson(json, type);

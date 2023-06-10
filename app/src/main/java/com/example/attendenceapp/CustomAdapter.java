@@ -1,6 +1,7 @@
 package com.example.attendenceapp;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,11 @@ public interface OnItemClickListener{
     public interface OnItemLongClickListener {
         boolean onItemLongClick(int adapterPosition);
     }
-//    public interface OnItemLongClickListener {
-//        public boolean onItemLongClicked(int position);
-//    }
+
 public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener; }
-    public void setOnItemCLongclickListener(OnItemLongClickListener onItemlongClickListener) {
-        this.onItemLongClickListener = onItemlongClickListener; }
+//    public void setOnItemCLongclickListener(OnItemLongClickListener onItemlongClickListener) {
+//        this.onItemLongClickListener = onItemlongClickListener; }
     public CustomAdapter(Context context, ArrayList<ClassItem> arrayList) {
         this.arrayList = arrayList;
         this.context = context; }
@@ -45,7 +44,7 @@ public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
     public int getItemCount() {
         return arrayList.size();
     }
-    public class ClassViewHolder extends RecyclerView.ViewHolder {
+    public class ClassViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener  {
         TextView t1,t2;
         private View view;
         public ClassViewHolder(@NonNull View itemView,OnItemClickListener onItemClickListener,OnItemLongClickListener onItemLongClickListener) {
@@ -53,7 +52,15 @@ public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
             t1=(TextView)itemView.findViewById(R.id.textView);
             t2=(TextView)itemView.findViewById(R.id.textView9);
              itemView.setOnClickListener(v -> onItemClickListener.onClick(getAdapterPosition()));
-               itemView.setOnLongClickListener(v -> onItemLongClickListener.onItemLongClick(getAdapterPosition()));
+//               itemView.setOnLongClickListener(v -> onItemLongClickListener.onItemLongClick(getAdapterPosition()));
+            itemView.setOnCreateContextMenuListener((View.OnCreateContextMenuListener) this);
         }
 
-}}
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(getAdapterPosition(),0,0,"DELETE");
+            menu.add(getAdapterPosition(),1,0,"Add Weekly Agenda");
+        }
+    }
+
+}

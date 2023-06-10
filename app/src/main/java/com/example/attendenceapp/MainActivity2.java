@@ -130,7 +130,7 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
     private void saveStatus() {
     for (StudentItem studentItem : arrayList){
         String status=studentItem.getStatus();
-        if (status!="P")
+        if (status!="P")   //.....................not working
             status = "A";
 
         long value=dbHelper.addStatus(studentItem.getS_id(),cid,calendar.getDate(),status);
@@ -140,7 +140,7 @@ private ArrayList<StudentItem> arrayList=new ArrayList<StudentItem>(); @Requires
 
     }
     }
-private void loadStatusData(){
+private void loadStatusData(){ //....................... not working
     for (StudentItem studentItem : arrayList){
         String status= dbHelper.getStatus(studentItem.getS_id(),calendar.getDate());
         if (status!=null)
